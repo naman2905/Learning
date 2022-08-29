@@ -1,0 +1,101 @@
+1.Slicing in list:
+	# list = [1, 2, 3 , 4, 5, 6]
+	# print(list)
+	# print(list[:-4:-1])
+#return last three elements of an array
+
+2.Indexing in database:
+Clustered and unclustered
+
+3.A pattern to print
+0
+0 1 
+0 2 4
+0 3 6 9 
+0 4 8 12 16
+0 5 10 15 20 25
+0 6 12 18 24 30 36
+
+4.Design pattern in oops:
+singleton class
+5.differnce between a tuple and a list
+6.Overriding
+
+7.Kafka , microservices
+8.Restful anf restless apis
+9.Git fetch and git stash --- 
+git fetch is the command that tells your local git to retrieve the latest meta-data info from the original (yet doesn't do any file transferring. It's more like just checking to see if there are any changes available). git pull on the other hand does that AND brings (copy) those changes from the remote repository.
+
+10.map , reduce and filter in python
+11.how do we manage sessions in django
+12.how do we know that the apis are restful apis
+13.when do we use restful apis
+14. when do we use kafka
+15. what is microservices
+16.Difference between left join and full join
+17.how do we do typecasting in python
+------------------------------------------------------->
+18.what is with statement in python 
+The with statement in Python is used for resource management and exception handling. You'd most likely find it when working with file streams. For example, the statement ensures that the file stream process doesn't block other processes if an exception is raised, but terminates properly.
+
+-------------------------------------------------------->
+19.what is the difference between equal operator and is operator?
+You can see here that the code (list_4 is list_6) is False, since list_4 and list_6 are pointing towards two separate objects even if they might have the same contents. Thus, we can conclude that “is” would return to be True when both the variables point towards the very same object and “==” would return to be True when the objects that are referred to by the available variables are equal.
+
+---------------------------------------------------------------------->
+
+Q1. Why do we use rest api?
+
+1.when we need to send the data in json/xml format
+
+2.when we aree using the django for making the application and we need to integrate the apis
+
+3.When we may need to scale the project in future
+
+4.When we need independency of endpoints.
+
+---------------------------------------------------------------------->
+An Event Loop also referred to as an Event Dispatcher or a Task Scheduler is a software design constructed to handle system events concurrently. The main purpose of an Event Loop is to unclog blocking operations and let multiple operations execute in “parallel”.
+----------------------------------------------------------------------->
+ instead of building an array containing all the values and returning them all at once, a generator yields the values one at a time, which requires less memory and allows the caller to get started processing the first few values immediately.
+
+----------------------------------------------------------------------->
+1. aysnchronous vs multithreading:
+ multithreading programming is all about concurrent execution of different functions. Async programming is about non-blocking execution between functions,
+ Choosing between the two programming models depends mainly on performance.
+Threading is about workers; asynchrony is about tasks
+
+--------------------------------------------------->
+
+1. The delete statement is used to remove single or multiple records from an existing table depending on the specified condition. The truncate command removes the complete data from an existing table but not the table itself. It preserves the table structure or schema.
+2. Once the record deletes by using the TRUNCATE command, we cannot recover it back. In contrast, we can recover the deleted data back which we removed from the DELETE operation.
+3. TRUNCATE command is faster than the DELETE command
+4.DELETE command can filter the record/tuples by using the WHERE clause. However, the TRUNCATE command does not allow to use WHERE clause, so we cannot filter rows while truncating.
+5.DELETE performs deletion row-by-row one at a time from the table, in the order, they were processed. However, TRUNCATE operates on data pages instead of rows because it deleted entire table data at a time.
+
+-------------------------------------------------->
+
+Write a function mf_seq(n: int)->List[int] that returns the first n numbers of the Mindfire sequence. 
+The first three numbers are 0, 1, and 3.  The nth number in the sequence is defined as the sum of the previous two numbers minus the number in the sequence 3 positions ago.  So mf_seq(5) would return back [0, 1, 3, 4, 6]
+
+mf_seq(0) = []
+mf_seq(1) = [0]
+mf_seq(2) = [0, 1]
+mf_seq(3) = [0, 1, 3]
+
+--------------------------------------------------->
+
+The cost of a stock on each day is given in an array, find the max profit that you can make by buying and selling in those days. For example, if the given array is {100, 180, 260, 310, 40, 535, 695}, the maximum profit can earn by buying on day 0, selling on day 3. Again, buy on day 4 and sell on day 6. If the given array of prices is sorted in decreasing order, then profit cannot be earned at all.
+
+---------------------------------------------------->
+Status Code:
+1. 200 (for ok)
+2. 201 (Created)
+3. 404 (Not Found)
+4. 403 (Forbidden)
+5. 500 (Internal Server Err)
+
+----------------------------------------------------->
+
+
+

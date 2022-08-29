@@ -1,0 +1,22 @@
+loose, light weight services, developed for one specific functionailty only
+services are independent of each other, so that if one service goes down then it will not affect the other services.
+error detection is quite simple 
+code inspection is very easy
+scaling up the service is very easy 
+no chance to do any unnecesarry changes while development to existing code mistakenly as there is seperate codebase for each service 
+we can start development in any of the languages with any framework and dbs, as it is not any language specific.
+
+crons-
+deployment takes much time as we
+
+
+Monolithic
+
+Pros-
+it is very straightforward and quick to implement., why
+becoz, this is the business requirements and there is a code base, then starts developing it without any due, but in case of micro, we need to split tasks/functionality along with the dbs very precisely
+
+
+Cons-
+the monolith is rigid due to the tight coupling of the components.
+Everything is molded on the same platform, using the same coding language and database. 

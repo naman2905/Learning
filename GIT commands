@@ -1,0 +1,48 @@
+Command line environment is used for interacting with git ---> Git Bash
+
+git log -n ---> Command is used to show limited number of commits.
+
+Command is useful for getting a high-level overview of the project history---> git log --oneline
+
+How do you save the current state of your code into the git version control?---> using git add
+
+What is an alternative to merging in git? -- > git rebase
+
+What is the correct commit syntax for all changes with a message?-- > git commit -am "I'm coding"
+
+					[OR]
+
+git commit -a -m "new message" adds all tracked files to the staging area and commits them in one step.
+
+
+How can you clean all untracked and ignored files in your working tree?--->> git clean -fdx
+
+# Delete the files from the repository
+git clean -f
+To remove directories, run git clean -f -d or git clean -fd
+To remove ignored files, run git clean -f -X or git clean -fX
+To remove ignored and non-ignored files, run git clean -f -x or git clean -fx
+
+
+How do you remove a file from the staging area?---> git reset HEAD -- path/to/file    [OR]   git reset(to unstage all the staged files.)
+
+
+
+
+`git pull` is a shorthand for which commands?--->  fetch+merge or fetch+rebase, depending on configuration
+
+
+What happens when you run`git commit` without `-m` argument?-->> If you commit without using the -m option, git will open your default text editor with a new file, which will include a commented-out list of all the files/changes that are staged in the commit.(You can use any (terminal or GUI-based) text editor for commit messages if you point one of these settings to it
+)
+
+
+
+How can you rename your current branch?---> 
+
+If you want to rename a branch while pointed to any branch, do:
+
+git branch -m <oldname> <newname>
+If you want to rename the current branch, you can do:
+
+git branch -m <newname>
+

@@ -1,0 +1,197 @@
+Q49. Diff b/w values() and value_list()?
+
+The values() method returns a QuerySet containing dictionaries:
+
+<QuerySet [{'comment_id': 1}, {'comment_id': 2}]>
+
+
+The values_list() method returns a QuerySet containing tuples:
+
+<QuerySet [(1,), (2,)]>
+If you are using values_list() with a single field, you can use flat=True to return a QuerySet of single values instead of 1-tuples:
+
+<QuerySet [1, 2]>
+
+
+
+values()
+Returns a QuerySet that returns dictionaries, rather than model instances, when used as an iterable.
+
+values_list()
+Returns a QuerySet that returns list of tuples, rather than model instances, when used as an iterable.
+
+distinct()
+distinct are used to eliminate the duplicate elements.
+
+Example:
+
+>>> list(Article.objects.values_list('id', flat=True)) # flat=True will remove the tuples and return the list   
+[1, 2, 3, 4, 5, 6]
+
+>>> list(Article.objects.values('id'))
+[{'id':1}, {'id':2}, {'id':3}, {'id':4}, {'id':5}, {'id':6}]
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q48. How can you see the raw SQL queries that Django is running?
+
+First, make sure that your DEBUG setting is set to True. Then, type the following commands:
+
+from django.db import connection 
+connection.queries
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q24. Explain the caching strategies of Django?
+
+Caching basically means to save the output of an expensive calculation in order to avoid performing the same calculation again. Django provides a robust cache system which in turn helps you save dynamic web pages so that they don't have to be evaluated over and over again for each request. Some of the caching strategies of Django are listed down in the following table:
+
+CPU stores some files in the cache Memory. And, when CPU needs them again it looks for those files in Cache Memory first. Since Cache Memory is fast, the processing time improves. 
+
+
+Types--
+
+
+1. Memcached: Memcached is a memory-based, key-value store for small chunks of data. It supports distributed caching across multiple servers.
+
+2. Database: Here, the cache fragments are stored in a database. A table for that purpose can be created with one of the Django's admin commands. This isn't the most performant caching type, but it can be useful for storing complex database queries.
+
+#DataFlair #Database Cache
+CACHES = {
+    'default':{
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'dataflair_cache',
+    }
+}
+
+3. File system: The cache is saved on the file system, in separate files for each cache value. This is the slowest of all the caching types, but it's the easiest to set up in a production environment.
+
+#DataFlair #File System Cache
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': 'D:Django_Projects/dataflair/Cache',
+    }
+}
+
+4. Local memory: Local memory cache, which is best-suited for your local development or testing environments. While it's almost as fast as Memcached, it cannot scale beyond a single server, so it's not appropriate to use as a data cache for any app that uses more than one web server.
+
+#DataFlair #Local Memory Cache
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'DataFlair',
+    }
+}
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+8. What are middlewares in Django? How do you create custom middleware.
+
+Answer:
+Middleware is a low-level plugin that can be used to hook into Django’s request/response cycle. There are already middlewares available by default when a django project is created and it can found in settings.py.
+We can create a custom middleware and include it in the list of middleware with the existing ones.
+
+To create a custom middleware following structure needs to be followed:
+
+# Middleware class should always consist __init__() and __call__()
+class MyCustomMiddleware():
+      def __init__(self, get_response):
+          self.get_response = get_response 
+ 
+ def __call__(self, request):
+    # write the code to be executed before calling view here
+ 
+     response = self.get_response(request) 
+ 
+    # write the code to be executed after calling view here.
+    
+     return response
+
+Add this middleware at the last of “Middleware” section in settings.py. Also make sure the order of the middleware is correct. Because it is called from top to down while processing requests and then bottom to up while returning response.
+
+Default middlewares example - The functions can be a security, session, csrf protection, authentication etc.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+** To use multiple databases you have to tell Django about the database server you will be using, but adding them in the settings.py.
+
+Multiple databases-->
+
+settings.py :
+.....
+DATABASES = {
+    'default': {
+        'NAME': 'app_data',
+        'ENGINE': 'django.db.backends.postgresql',
+        'USER': 'postgres_user',
+        'PASSWORD': 's3krit'
+    },
+    'users': {
+        'NAME': 'user_data',
+        'ENGINE': 'django.db.backends.mysql',
+        'USER': 'mysql_user',
+        'PASSWORD': 'priv4te'
+    }
+}
+
+The migrate management command operates on one database at a time. By default, it operates on the default database, but by providing the --database option, you can tell it to synchronize a different database.
+
+$ ./manage.py makemigrations (same as it is)
+$ ./manage.py migrate --database=users
+$ ./manage.py migrate --database=customers
+You can manually select the database in your queries queries e.g
+
+user = User(....)
+user.save(using='users')
+
+Customer.objects.all().using('users')
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+What are Serializers in Django?
+Serializers in Django REST Framework are responsible for converting objects into data types understandable by javascript and front-end frameworks.
+
+
+What is the use of Serializers?
+Serializers allow complex data such as querysets and model instances to be converted to native Python datatypes that can then be easily rendered into JSON , XML or other content types.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q. What is Django Signals?
+
+https://ilovedjango.com/django/models-and-databases/django-signals/
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q. What is the CSRF token in Django?
+The CSRF token is like an alphanumeric code or random secret value that's peculiar to that particular site. Hence, no other site has the same code. In Django, the token is set by CsrfViewMiddleware in the settings.py file. A hidden form field with a csrfmiddlewaretoken field is present in all outgoing requests.
+
+The CSRF middleware is activated by default in the MIDDLEWARE setting
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q. What is SQL Injection?
+
+
+SQL injection is a code injection technique that might destroy your database.
+
+SQL injection is one of the most common web hacking techniques.
+
+SQL injection is the placement of malicious code in SQL statements, via web page input.
+
+
+https://www.w3schools.com/sql/sql_injection.asp
+
+

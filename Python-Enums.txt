@@ -1,0 +1,41 @@
+>>> from enum import Enum
+>>> class Letter(Enum):
+...    A = 1
+...    B = 2
+...    C = 3
+>>> print(Letter)
+<enum 'Letter'>>>> for l in Letter:
+...     print(l.name,l.value)
+... 
+A 1
+B 2
+C 3
+>>> print(Letter.A.name)
+A
+>>> print(Letter.A.value)
+1
+>>> Letter.A == Letter.B
+False
+>>>>>> isinstance(Letter.A, Letter)
+True
+>>> Letter['A']
+<Letter.A: 1>
+>>> Letter(1)
+<Letter.A: 1>
+
+
+
+We can also create Enum from Dictionary as well.
+
+from enum import Enum
+
+tax = {
+    'OR': 0.05,
+    'WA': 0.10,
+    'CA': 0.08,
+    'NY':0.15
+}
+
+StateTax = Enum('tax', tax)
+
+tax=StateTax.OR

@@ -1,0 +1,75 @@
+3. What GIL (global interpreter lock)? How does it allow multi-threading in python?
+
+Answer: GIL is a lock which makes sure python interpreter is held by only one thread at a time. That means only one thread can be in a execution status at any point of time. And this is why python is a single threaded programming language. This was introduced to solve the reference count problem which is used by python for garbage collection.
+
+Then how is multi-threading module working in python, you may ask!
+Well, this global interpreter lock applies only for CPU bound activities. So if there is any code which affects or uses CPU it automatically starts acting as a single threaded. But all the general programs can still work in a multi-threaded fashion.
+
+
+
+
+
+
+
+9. what is the best strategy to sync data between DB and redis cache?
+
+Answer:
+does it sync with DB automatically when there is a change in the data in DB
+
+No, it doesn't.
+
+we will have to implement the sync strategy, if yes, what is the best way to do it.
+
+This will depend on your particular case. Usually caches are sync'd in two common ways:
+
+Data cached with expiration. Once cached data has expired, a background process adds fresh data to cache, and so on. Usually there's data that will be refreshed in different intervals: 10 minutes, 1 hour, every day...
+
+Data cached on demand. When an user requests some data, that request goes through the non-cached road, and that request stores the result in cache, and a limited number of subsequent requests will read cached data directly if cache is available. This approach can fall into #1 one too in terms of cache invalidation interval.
+
+
+Q. Generators in Python?
+
+instead of building an array containing all the values and returning them all at once, a generator yields the values one at a time, which requires less memory and allows the caller to get started processing the first few values immediately.
+
+
+Q. Why tuple is faster than list?
+
+Tuples are stored in a single block of memory. Tuples are immutable so, It doesn't require extra space to store new objects. Lists are allocated in two blocks: the fixed one with all the Python object information and a variable-sized block for the data. It is the reason creating a tuple is faster than List.
+
+
+
+
+Multithreading Vs Multiprocessing Vs Asyncio
+
+threads are dependent of each other.
+share same memory space
+inter communication is easy 
+
+The difference is that threads run in the same memory space, while processes have separate memory. This makes it a bit harder to share objects between processes with multiprocessing. Since threads use the same memory, precautions have to be taken or two threads will write to the same memory at the same time. 
+
+advantage of threads over process->
+1. Inter-thread communication (sharing data etc.) is significantly simpler to program than inter-process communication. 
+2. Context switches between threads are faster than between processes.
+
+advantages of process over threads->
+1. The key advantage is isolation. A crashing process won't bring down other processes, whereas a crashing thread will probably cause great damage to other threads.
+2. Since threads share same memory so more precautions have to be taken or two threads will write to the same memory at the same time. 
+
+Multiprocessing in Python is the only real way to achieve true parallelism. Multithreading cannot achieve this because the GIL prevents threads from running in parallel.
+Multithreading is concurrent and is used for IO-bound tasks
+Multiprocessing achieves true parallelism and is used for CPU-bound tasks
+
+asyncio is essentially threading where not the CPU but you, as a programmer (or actually your application), decide where and when does the context switch happen. In Python you use an await keyword to suspend the execution of your coroutine (defined using async keyword).
+
+
+Threads Vs Process
+
+Indexing & Sharding in Databases
+
+
+
+Sharding is a method for distributing or partitioning data across multiple machines.
+
+It is useful when no single machine can handle large modern-day workloads, by allowing you to scale horizontally.
+
+Horizontal scaling, also known as scale-out, refers to adding machines to share the data set and load. Horizontal scaling allows for near-limitless scaling to handle big data and inte

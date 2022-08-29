@@ -1,0 +1,58 @@
+											Undo Last Git Commit
+					(https://devconnected.com/how-to-undo-last-git-commit/#:~:text=The%20easiest%20way%20to%20undo,removed%20from%20your%20Git%20history.)
+		
+1. Undo Last Git Commit with reset
+											
+* To undo last git commit --->  git reset --soft HEAD~1 	
+	here, 
+		"soft" means for undo the last commit by preserving the changes done to the files in the index.
+		“HEAD~1” means that you want to reset the HEAD (the last commit) to one commit before in the log history
+
+* To view the commit history--->  git log --oneline
+
+output of commit history --> 
+
+3fad532  Last commit   (HEAD)
+3bnaj03  Commit before HEAD   (HEAD~1)
+vcn3ed5  Two commits before HEAD   (HEAD~2)
+
+
+### In some cases, you simply want to get rid of the commit and the changes done to the files. This is the purpose of the “–hard” option.
+
+							
+In order to undo the last commit and discard all changes in the working directory and index, execute the “git reset” command with the “–hard” option and specify the commit before HEAD (“HEAD~1”).
+
+* To undo last git commit --->  git reset --hard HEAD~1
+Be careful when using “–hard” : changes will be removed from the working directory and from the index, you will lose all modifications.
+
+
+2. Undo Last Commit with revert
+
+* To undo last git commit ---> git revert HEAD
+
+The “git revert” command is slightly different from the “git reset” command because it will record a new commit with the changes introducted by reverting the last commit.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+											Merge Conflicts
+
+
+What is git merge conflict?
+
+A merge conflict is an event that occurs when Git is unable to automatically resolve differences in code between two commits. When all the changes in the code occur on different lines or in different files, Git will successfully merge commits without your help.
+
+
+
+How to Resolve Merge Conflicts in Git?
+
+The easiest way to resolve a conflicted file is to open it and make any necessary changes.
+After editing the file, we can use the git add a command to stage the new merged content.
+The final step is to create a new commit with the help of the git commit command.
+
+
+Can you undo a merge git?
+You can undo a Git merge using the git reset –merge command. This command changes all files that are different between your current repository and a particular commit. There is no “git undo merge” command but the git reset command works well to undo a merge.22-Dec-2020
+
+
+What causes a merge conflict?
+Often, merge conflicts happen when people make different changes to the same line of the same file, or when one person edits a file and another person deletes the same file. You must resolve all merge conflicts before you can merge a pull request on GitHub.

@@ -1,0 +1,1 @@
+https://python.plainenglish.io/instance-methods-vs-class-methods-vs-static-methods-in-python-ac39690830ea

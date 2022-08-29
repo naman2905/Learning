@@ -1,0 +1,22 @@
+What are lookups in MongoDB?
+The $lookup operator is an aggregation stage, which is used to join a document from one collection to a document of another collection of the same database based on some queries. Both the collections should belong to the same databases.
+
+What is meant by sharding?
+Sharding is the process of distributing data across multiple hosts. In MongoDB, sharding is achieved by splitting large data sets into small data sets across multiple MongoDB instances
+Sharding is a type of database partitioning that separates large databases into smaller, faster, more easily managed parts. These smaller parts are called data shards. The word shard means "a small part of a whole."
+
+
+what is Namespace in MongoDB?
+The canonical name for a collection or index in MongoDB. The namespace is a combination of the database name and the name of the collection or index, like so: [database-name]. [collection-or-index-name]. All documents belong to a namespace.
+
+
+what is indexing?
+
+An index is a database structure that you can use to improve the performance of database activity. A database table can have one or more indexes associated with it. 
+Indexing is a way to optimize the performance of a database 
+Indexes are created using a few database columns. 
+
+The first column is the Search key that contains a copy of the primary key or candidate key of the table. These values are stored in sorted order so that the corresponding data can be accessed quickly. 
+Note: The data may or may not be stored in sorted order.
+The second column is the Data Reference or Pointer which contains a set of pointers holding the address of the disk block where that particular key value can be found.
+

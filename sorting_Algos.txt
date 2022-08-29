@@ -1,0 +1,40 @@
+1. Insertion Sort
+Insertion sort is a simple sorting algorithm that works similarly to the way you sort playing cards in your hands. The array is virtually split into a sorted and an unsorted part. Values from the unsorted part are picked and placed at the correct position in the sorted part. Insertion sort is fast and best suitable either when the problem size is small (because it has low overhead) or when the data is nearly sorted (because it is adaptive).
+
+
+
+
+
+2. Selection Sort
+The selection sort algorithm sorts an array by repeatedly finding the minimum element (considering ascending order) from the unsorted part and putting it at the beginning. The algorithm maintains two subarrays in a given array:
+
+The subarray which is already sorted
+Remaining subarray which is unsorted
+In every iteration/pass of selection sort, the minimum element (considering ascending order) from the unsorted subarray is picked and moved to the sorted subarray. The selection sort has the property of minimizing the number of swaps. Therefore, it is the best choice when the cost of swapping is high.
+
+
+
+
+
+3. Bubble Sort
+Bubble Sort is the sorting algorithm that works by repeatedly swapping the adjacent elements if they are in the wrong order. After each iteration or pass, the largest element reaches the end (in case of ascending order) or the smallest element reaches the end (in case of descending order). The pass through the list is repeated until the list is sorted. This algorithm is not suitable for large data sets as its average and worst-case complexity are of Ο(n^2) where n is the number of items
+
+
+
+
+
+4. Merge Sort
+Unlike the above three sorting algorithms, this algorithm is based on the divide-and-conquer technique. It divides the input array into two halves, calls itself for the two halves, and then merges the two sorted halves. The heart of the Merge Sort is the merge() function, which is used for merging two halves. The merge(A, p, q, r) is a key process that assumes that A[p..q] and A[q+1..r] are sorted and merges the two sorted sub-arrays into one.
+
+Merge Sort is the only option when you need a stable and O(N log N) sort.
+
+
+
+
+5. Quick Sort
+Quick Sort is also a Divide and Conquer algorithm. It picks an element as a pivot and partitions the given array around the picked pivot such that all the smaller elements are to the left of the pivot and all the greater elements are to the right of the pivot. There are many different versions of quickSort that pick pivot in different ways:
+
+Always pick the first element as a pivot.
+Always pick the last element as the pivot (implemented below).
+Pick a random element as a pivot.
+Pick the median as a pivot.

@@ -1,0 +1,68 @@
+l=[1,2,3,1,1,4,1]
+
+# with using predefined function
+
+def remove_duplicacy(l):
+	return list(set(l))
+	
+print(remove_duplicacy(l))
+
+
+
+# without using predefined function
+
+def remove_duplicacy(l):
+	l1=[]
+	for i in l:
+		if i not in l1:
+			l1.append(i)
+			
+	return l1
+	
+print(remove_duplicacy(l))
+
+
+
+
+
+
+i = [1,2,3,1,1,4,1]  
+o = [1,4,1,1,2,3,1] 
+
+
+print(i[-3:]+i[:len(l)-3])
+
+
+
+generators
+context-managers examples --with statements
+__enter__
+__exist__
+multithreading
+asyncio programming
+__next__
+iterators & generators
+
+
+# mydb.sessions.find_one_and_update(
+    #         filter={"user_id":userid, "session":True},
+    #         sort=[("_id",-1)],
+    #         update={"$set":{"last_active":datetime.datetime.now(pytz.timezone('Asia/Calcutta'))}}
+    #         )
+
+
+
+Python Package Index (PyPI) 
+
+
+
+x = ['ab','cd']
+print(list(map(list, x))) ===> [ [‘a’, ‘b’], [‘c’, ‘d’] 
+
+	
+python -m pdb python-script.py
+
+
+
+
+the gone game, avrodh, major, guilty minds, code m2, The Raikar Case, Illegal

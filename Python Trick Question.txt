@@ -1,0 +1,75 @@
+3) We Get This If We Add A List To Itself
+lis = [4,5,6]
+lis.append(lis)
+print(lis) # [4, 5, 6, [...]]
+
+
+2) We Can Use type() To Create Classes Without The ‘class’ Keyword
+Creating a Dog class using the type() function:
+
+def init(self, name, age):
+    self.name = name
+    self.age = age
+def bark(self):
+    print("woof")
+Dog = type("Dog", (), {"__init__":init, "bark":bark})
+
+
+
+
+
+
+5) We Can Use Classes As Decorators
+
+class append():
+    def __init__(self, char):
+        self.char = char
+    def __call__(self, function):
+        def inner(*args):
+            return function(*args) + self.char
+        return inner
+        
+@append("!")
+def hello(name):
+    return "hello " + name
+print(hello("fifi"))    # hello fifi!
+
+We can use multiple decorators on 1 function too:
+
+@append("?")
+@append("!")
+def hello(name):
+    return "hello " + name
+print(hello("fifi"))    # hello fifi!?
+
+
+
+
+
+3.) Where math doesn’t work 😯
+Guess the output in this case?
+
+print(max(-0.0, 0.0))
+Answer: -0.0
+You must have thought of 0.0 as the answer. But the answer is -0.0.
+
+Why did this happen? This occurs because of two reasons.
+
+Negative zero and zero are treated as equal in Python.
+And in the max function in python, if multiple items are maximal, the function then returns the first one encountered.
+Hence max function returns the first occurrence of zero, which is -0.0
+
+
+
+
+
+5.) I want -n times more 😬
+Guess the output?
+
+print(“Can you give 50 claps to this story?” * (-1))
+Answer: it prints an empty string
+
+This is because values of n less than 0 are treated as 0 (which gives an empty sequence of the same type as s)
+
+
+

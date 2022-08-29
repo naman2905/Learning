@@ -1,0 +1,31 @@
+8. Sort dictionary by keys
+Sorting dictionaries isn’t as simple as sorting lists — we can’t use either sort() or sorted() to sort dictionaries as we do it with lists.
+
+The good news is that we can combine dictionary comprehension with the sorted() function to sort dictionaries by keys.
+
+Let’s have a look. In the example below, we’ll sort the dictionaries by name of the products.
+
+product_prices = {'Z': 9.99, 'Y': 9.99, 'X': 9.99}
+>>{key:product_prices[key] for key in sorted(product_prices.keys())}
+{'X': 9.99, 'Y': 9.99, 'Z': 9.99}
+9. Sort dictionary by values
+Similarly to sorting dictionaries by keys, we need to use the sorted() function and list comprehension to sort dictionaries by values. But, in addition to that, we also need to add a lambda function.
+
+First, let’s see all the parameters that the sorted() function has.
+
+sorted(iterable, key=None, reverse=False)
+To sort a dictionary by values, we need to use the key parameter. This parameter accepts a function that serves as a key for the sort comparison. Here we can use a lambda function to make things simpler.
+
+Let’s say we have a dictionary with population values and we want to sort it by values.
+
+population = {'USA':329.5, 'Brazil': 212.6, 'UK': 67.2}
+
+>>> sorted(population.items(), key=lambda x:x[1])
+[('UK', 67.2), ('Brazil', 212.6), ('USA', 329.5)]
+Now the only thing left is to add dictionary comprehension.
+
+population = {'USA':329.5, 'Brazil': 212.6, 'UK': 67.2}
+
+>>> {k:v for k, v in sorted(population.items(), key=lambda x:x[1])}
+{'UK': 67.2, 'Brazil': 212.6, 'USA': 329.5}
+

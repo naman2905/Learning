@@ -1,0 +1,10 @@
+3 things - 
+1. how to take pk from urls
+2. how to render list of object data on server
+3. how to get data from query params 
+4. how to raise Exception
+
+
+
+json.loads(request.body)
+JsonResponse({})

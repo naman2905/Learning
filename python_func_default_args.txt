@@ -1,0 +1,190 @@
+Q. python functions with default and non-default arguments?
+
+
+def greet(name, msg="Good morning!"):
+    """
+    This function greets to
+    the person with the
+    provided message.
+
+    If the message is not provided,
+    it defaults to "Good
+    morning!"
+    """
+
+    print("Hello", name + ', ' + msg)
+
+
+greet("Kate")
+greet("Bruce", "How do you do?")
+Run Code
+Output
+
+Hello Kate, Good morning!
+Hello Bruce, How do you do?
+In this function, the parameter name does not have a default value and is required (mandatory) during a call.
+
+On the other hand, the parameter msg has a default value of "Good morning!". So, it is optional during a call. If a value is provided, it will overwrite the default value.
+
+Any number of arguments in a function can have a default value. But once we have a default argument, all the arguments to its right must also have default values.
+
+This means to say, non-default arguments cannot follow default arguments. For example, if we had defined the function header above as:
+
+def greet(msg = "Good morning!", name):
+We would get an error as:
+
+SyntaxError: non-default argument follows default argument
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+Q. Difference b/w read() & readline() & readlines() in python?
+
+
+
+This question has been answered countless times, and the documentation does a good job of describing the differences, too. But here goes:
+
+If you have a file (test.txt) like so:
+
+first line
+second line
+third line
+Then this code:
+
+with open("test.txt", "r") as file:
+    line = file.readline()
+    print(line)
+Will produce this output:
+
+first line
+That's because readline just reads the next line.
+
+If you use this code instead:
+
+with open("test.txt", "r") as file:
+    content = file.read()
+    print(content)
+Output:
+
+first line
+second line
+third line
+read() reads the entire contents of the file into a string. You can also give read() an optional argument, which designates the number of characters to read from the file:
+
+with open("test.txt", "r") as file:
+    content = file.read(15)
+    print(content)
+Output:
+
+first line
+seco
+Finally, the third function, which you didn't mention, is readlines, which returns a list of lines (strings):
+
+with open("test.txt", "r") as file:
+    lines = file.readlines()
+    print(lines)
+Output:
+
+['first line\n', 'second line\n', 'third line\n']
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Q. Convert string represation of list into list?
+
+
+Python | Convert a string representation of list into list
+
+
+Many times, we come over the dumped data that is found in the string format and we require it to be represented into the actual list format in which it was actually found. This kind of problem of converting a list represented in string format back to list to perform tasks are quite common in web development. Let’s discuss certain ways in which this can be performed.
+
+Method #1: Using split() and strip()
+
+
+# Python code to demonstrate converting 
+# string representation of list to list
+# using strip and split
+  
+# initializing string representation of a list
+ini_list = "[1, 2, 3, 4, 5]"
+  
+# printing initialized string of list and its type
+print ("initial string", ini_list)
+print (type(ini_list))
+  
+# Converting string to list
+res = ini_list.strip('][').split(', ')
+  
+# printing final result and its type
+print ("final list", res)
+print (type(res))
+Output:
+initial string [1, 2, 3, 4, 5]
+<class 'str'>
+final list ['1', '2', '3', '4', '5']
+<class 'list'>
+ 
+Method #2: Using ast.literal_eval()
+
+
+# Python code to demonstrate converting 
+# string representation of list to list
+# using ast.literal_eval()
+import ast
+  
+# initializing string representation of a list
+ini_list = "[1, 2, 3, 4, 5]"
+  
+# printing initialized string of list and its type
+print ("initial string", ini_list)
+print (type(ini_list))
+  
+# Converting string to list
+res = ast.literal_eval(ini_list)
+  
+# printing final result and its type
+print ("final list", res)
+print (type(res))
+Output:
+initial string [1, 2, 3, 4, 5]
+<class 'str'>
+final list [1, 2, 3, 4, 5]
+<class 'list'>
+ 
+Method #3: Using json.loads()
+
+
+# Python code to demonstrate converting 
+# string representation of list to list
+# using json.loads()
+import json
+  
+# initializing string representation of a list
+ini_list = "[1, 2, 3, 4, 5]"
+  
+# printing initialized string of list and its type
+print ("initial string", ini_list)
+print (type(ini_list))
+  
+# Converting string to list
+res = json.loads(ini_list)
+  
+# printing final result and its type
+print ("final list", res)
+print (type(res))
+Output:
+initial string [1, 2, 3, 4, 5]
+<class 'str'>
+final list [1, 2, 3, 4, 5]
+<class 'list'>
+

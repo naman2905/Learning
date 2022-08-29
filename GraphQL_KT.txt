@@ -1,0 +1,256 @@
+﻿                      GraphQL – Graphene-Django Installation and Setup 
+
+1. pip install graphene-django
+  # To install in your Virtual Environment and Locally also
+
+2.   INSTALLED_APPS = [
+	"django.contrib.staticfiles", # Required for GraphiQL
+    "graphene_django”
+]
+# Add graphene django  to the installed apps  in settings.py file of your Django Project
+
+3. We need to add a graphql URL to the urls.py file of your django Project.
+from django.urls import path
+from graphene_django.views import GraphQLView
+
+urlpatterns = [
+path('admin/', admin.site.urls),
+path('graphql/', GraphQLView.as_view(graphiql=True)),
+# path("graphql", csrf_exempt(GraphQLView.as_view(graphiql=True))),
+path('employee/', views.EmployeesCrud.as_view(), name='employeecrud'),
+path('employee/<int:pk>/', views.EmployeesCrud.as_view(), name='employeecrud')
+]
+
+# Change graphiql=True to graphiql=False if you do not want to use the GraphiQL API browser.
+
+4. Finally, define the schema location for Graphene in the Settings.py file of your Django project:
+
+GRAPHENE = {
+"SCHEMA": "sample_project.schema.schema"
+}
+
+
+Now our Basic Setup is Done.
+
+5.  First we have to create the types.py file in our APP eg: employee in my Sample_project.
+
+6. We define the type of Every model for which we want to add Query or Mutation
+
+import graphene
+from graphene_django import DjangoObjectType
+
+from employee.models import Employee
+
+class EmployeeType(DjangoObjectType):
+class Meta:
+model = Employee
+fields = "__all__"
+
+
+7. Now we create a schema.py file in our App . schema.py file is used to create a queries
+import graphene
+from employee.models import Employee
+from employee import types
+from employee.mutations import EmployeeCreate
+
+
+class EmployeeList(graphene.ObjectType):
+employees = graphene.List(types.EmployeeType)
+employee = graphene.Field(types.EmployeeType, id=graphene.Int())
+
+def resolve_employees(root, info):
+return Employee.objects.all()
+
+def resolve_employee(root, info, id):
+try:
+employee = Employee.objects.get(id=id)
+return employee
+except Employee.DoesNotExist:
+return None
+
+
+8.  Now we create a mutations.py file in our App. To create a Mutations
+
+from logging import error
+import graphene
+from employee import types
+from employee.models import Employee
+
+class EmployeeCreate(graphene.Mutation):
+class Arguments:
+reg_no = graphene.Int(required=True)
+name = graphene.String(required=True)
+email = graphene.String(required=True)
+mobile = graphene.String(required=True)
+
+errors = graphene.String()
+employee = graphene.Field(types.EmployeeType)
+
+@staticmethod
+def mutate(root, info, reg_no, name, email, mobile):
+try:
+employee = Employee.objects.create(emplyee_regNo=reg_no,
+emplyee_name=name,
+employee_email=email,
+employee_mobile=mobile
+
+)
+return EmployeeCreate(employee=employee, errors=None)
+except:
+return EmployeeCreate(employee=None, errors="Arguments not Valid")
+
+
+9. After creating mutation we should add this mutation class in schema file like this :
+
+class EmployeeMutations(graphene.ObjectType):
+''' Add Customer related Mutations here '''
+employee_create = EmployeeCreate.Field()
+
+
+10.  Now we create a new schema.py file in our project level so that we can run all queries and muatation.
+
+import graphene
+from graphene.types.mutation import Mutation
+from employee import mutations
+from employee.schema import EmployeeList
+from employee.schema import EmployeeMutations
+
+class Query(EmployeeList, graphene.ObjectType):
+pass
+
+class Mutations(EmployeeMutations):
+pass
+
+schema = graphene.Schema(Query, Mutations)
+
+
+
+Now we can Run Our queries and mutations
+11. To run Queries and Mutation .
+	http://localhost:8000/graphql
+
+
+
+
+
+Now To test Graphql API’s
+
+
+12.  In our app their is one tests.py file is already created so we write test cases here.
+
+import json
+from employee.models import Employee
+from employee.schema import EmployeeList
+
+from django.test import TestCase
+
+from graphene.test import Client
+from graphene_django.utils.testing import GraphQLTestCase
+
+
+class MyFancyTestCase(GraphQLTestCase):
+def test_some_query(self):
+response = self.query(
+'''
+query {
+employees {
+id
+emplyeeName
+emplyeeRegno
+}
+}
+''',
+# op_name='employees'
+)
+
+content = json.loads(response.content)
+
+# This validates the status code and if you get errors
+self.assertResponseNoErrors(response)
+
+# Add some more asserts if you like
+...
+
+def test_query_with_variables(self):
+response = self.query(
+'''
+query employee($id: Int!){
+employee(id: $id) {
+id
+emplyeeRegno
+}
+}
+''',
+# op_name='employee',
+variables={'id': 1}
+)
+
+content = json.loads(response.content)
+
+# This validates the status code and if you get errors
+self.assertResponseNoErrors(response)
+
+
+12.  # You can run this test cases by:
+ python manage.py test
+ 
+
+13. If your Test cases run successfully then out will be.
+
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.013s
+
+OK
+Destroying test database for alias 'default'...
+
+14.  If any test case fail then error will be like:
+
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+..F
+======================================================================
+FAIL: test_some_query (employee.tests.MyFancyTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/erangle/Downloads/projects/sample_project/employee/tests.py", line 63, in test_some_query
+    self.assertResponseNoErrors(response)
+  File "/home/erangle/Downloads/projects/sample_project/sample_project/lib/python3.6/site-packages/graphene_django/utils/testing.py", line 117, in assertResponseNoErrors
+    self.assertEqual(resp.status_code, 200, msg or content)
+AssertionError: 400 != 200 : {'errors': [{'message': 'Cannot query field "name" on type "EmployeeType".', 'locations': [{'line': 5, 'column': 21}]}]}
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.016s
+
+FAILED (failures=1)
+Destroying test database for alias 'default'...
+
+
+15.
+
+class EmployeeTest(TestCase):
+""" Test module for Employee model """
+
+def setUp(self):
+Employee.objects.create(emplyee_regNo=2,
+emplyee_name="Ravi",
+employee_email="ravi@gmail.com",
+employee_mobile="7878788888")
+
+Employee.objects.create(emplyee_regNo=3,
+emplyee_name="ROom",
+employee_email="room@gmail.com",
+employee_mobile="7878788889")
+
+def testEmployeeEmail(self):
+employee2 = Employee.objects.get(emplyee_regNo=2)
+employee3 = Employee.objects.get(emplyee_regNo=3)
+self.assertEqual(
+employee2.get_email(), "ravi email address is ravi@gmail.com")
+self.assertEqual(
+employee3.get_email(), "ROom email address is room@gmail.com")
+
+
+
